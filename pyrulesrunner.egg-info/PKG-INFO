@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyrulesrunner
-Version: 1.0.1
+Version: 1.0.3
 Summary: A lightweight Python test runner with method-level discovery and coverage reporting
 Home-page: https://github.com/Pradeep241094/pythonrules
 Author: Pradeep Margasahayam Prakash
@@ -8,7 +8,7 @@ Author-email: pradeepprakash1024@gmail.com
 License: UNKNOWN
 Project-URL: Bug Reports, https://github.com/Pradeep241094/pythonrules/issues
 Project-URL: Source, https://github.com/Pradeep241094/pythonrules
-Project-URL: Documentation, https://github.com/Pradeep241094/pythonrules/README.md
+Project-URL: Documentation, https://github.com/Pradeep241094/pythonrules#readme
 Keywords: testing test-runner unittest coverage lint python
 Platform: UNKNOWN
 Classifier: Development Status :: 4 - Beta

@@ -6,7 +6,7 @@ A simple, efficient Python testing framework that provides test discovery at the
 code coverage reporting, and basic linting capabilities.
 """
 
-__version__ = "1.0.1"
+__version__ = "1.0.3"
 __author__ = "Test Runner Team"
 __email__ = "team@example.com"
 __description__ = "A lightweight Python test runner with method-level discovery and coverage reporting"

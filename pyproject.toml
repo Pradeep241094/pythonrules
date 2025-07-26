@@ -29,7 +29,7 @@ classifiers = [
 keywords = ["testing", "test-runner", "unittest", "coverage", "lint", "python"]
 
 [project.urls]
-Homepage = "https://github.com/Pradeep241094/pyrulesrunner"
+Homepage = "https://github.com/Pradeep241094/pythonrules"
 Repository = "https://github.com/Pradeep241094/pythonrules"
 Issues = "https://github.com/Pradeep241094/pythonrules/issues"
 Documentation = "https://github.com/Pradeep241094/pythonrules/blob/master/README.md"

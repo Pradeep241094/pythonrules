@@ -73,6 +73,6 @@ setup(
     project_urls={
         "Bug Reports": "https://github.com/Pradeep241094/pythonrules/issues",
         "Source": "https://github.com/Pradeep241094/pythonrules",
-        "Documentation": "https://github.com/Pradeep241094/pythonrules/README.md",
+        "Documentation": "https://github.com/Pradeep241094/pythonrules#readme"
     },
 )
