@@ -1,16 +1,16 @@
-Metadata-Version: 2.4
+Metadata-Version: 2.1
 Name: pyrulesrunner
-Version: 1.0.0
+Version: 1.0.1
 Summary: A lightweight Python test runner with method-level discovery and coverage reporting
 Home-page: https://github.com/Pradeep241094/pythonrules
 Author: Pradeep Margasahayam Prakash
-Author-email: Pradeep Margasahayam Prakash <pradeepprakash1024@gmail.com>
-License: MIT
-Project-URL: Homepage, https://github.com/pradeepprakash1024/pyrulesrunner
-Project-URL: Repository, https://github.com/pradeepprakash1024/pyrulesrunner
-Project-URL: Issues, https://github.com/pradeepprakash1024/pyrulesrunner/issues
-Project-URL: Documentation, https://github.com/pradeepprakash1024/pyrulesrunner/blob/main/README.md
-Keywords: testing,test-runner,unittest,coverage,lint,python
+Author-email: pradeepprakash1024@gmail.com
+License: UNKNOWN
+Project-URL: Bug Reports, https://github.com/Pradeep241094/pythonrules/issues
+Project-URL: Source, https://github.com/Pradeep241094/pythonrules
+Project-URL: Documentation, https://github.com/Pradeep241094/pythonrules/README.md
+Keywords: testing test-runner unittest coverage lint python
+Platform: UNKNOWN
 Classifier: Development Status :: 4 - Beta
 Classifier: Intended Audience :: Developers
 Classifier: License :: OSI Approved :: MIT License
@@ -25,21 +25,11 @@ Classifier: Topic :: Software Development :: Testing
 Classifier: Topic :: Software Development :: Quality Assurance
 Requires-Python: >=3.7
 Description-Content-Type: text/markdown
-License-File: LICENSE
 Provides-Extra: coverage
-Requires-Dist: coverage>=6.0; extra == "coverage"
 Provides-Extra: lint
-Requires-Dist: flake8>=4.0; extra == "lint"
 Provides-Extra: dev
-Requires-Dist: coverage>=6.0; extra == "dev"
-Requires-Dist: flake8>=4.0; extra == "dev"
 Provides-Extra: all
-Requires-Dist: coverage>=6.0; extra == "all"
-Requires-Dist: flake8>=4.0; extra == "all"
-Dynamic: author
-Dynamic: home-page
-Dynamic: license-file
-Dynamic: requires-python
+License-File: LICENSE
 
 # PyRules Runner
 
@@ -439,3 +429,5 @@ This is a lightweight test runner designed for simplicity. If you need more adva
 ## License
 
 This project is open source under the MIT License. Feel free to modify and distribut
+
+

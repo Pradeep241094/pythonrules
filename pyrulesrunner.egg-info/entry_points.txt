@@ -1,3 +1,4 @@
 [console_scripts]
 pyrulesrunner = testrules.cli:main
 testrules = testrules.cli:main
+

@@ -13,7 +13,7 @@ readme = "README.md"
 license = {text = "MIT"}
 requires-python = ">=3.7"
 classifiers = [
-    "Development Status :: 4 - Beta",
+    "Development Status :: Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
@@ -29,10 +29,10 @@ classifiers = [
 keywords = ["testing", "test-runner", "unittest", "coverage", "lint", "python"]
 
 [project.urls]
-Homepage = "https://github.com/pradeepprakash1024/pyrulesrunner"
-Repository = "https://github.com/pradeepprakash1024/pyrulesrunner"
-Issues = "https://github.com/pradeepprakash1024/pyrulesrunner/issues"
-Documentation = "https://github.com/pradeepprakash1024/pyrulesrunner/blob/main/README.md"
+Homepage = "https://github.com/Pradeep241094/pyrulesrunner"
+Repository = "https://github.com/Pradeep241094/pythonrules"
+Issues = "https://github.com/Pradeep241094/pythonrules/issues"
+Documentation = "https://github.com/Pradeep241094/pythonrules/blob/master/README.md"
 
 [project.optional-dependencies]
 coverage = ["coverage>=6.0"]
