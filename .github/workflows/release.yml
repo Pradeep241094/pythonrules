@@ -1,0 +1,116 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Get version from tag
+      id: get_version
+      run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          ## Lightweight Test Runner v${{ steps.get_version.outputs.VERSION }}
+          
+          ### Installation
+          
+          ```bash
+          pip install lightweight-test-runner==${{ steps.get_version.outputs.VERSION }}
+          ```
+          
+          ### Features
+          
+          - Method-level test discovery
+          - Multiple test types (unit, integration, e2e, regression)
+          - Test groups and patterns
+          - Code coverage reporting
+          - Linting integration
+          - Command-line interface
+          
+          ### Usage
+          
+          ```bash
+          # Run all tests
+          testrules
+          
+          # Run specific test types
+          testrules unit
+          testrules integration
+          testrules e2e
+          testrules regression
+          
+          # Run with custom configuration
+          testrules --config my_config.json
+          
+          # Run linting
+          testrules lint
+          
+          # Run comprehensive check
+          testrules check
+          ```
+          
+          ### Documentation
+          
+          See the [README](README.md) for full documentation and examples.
+          
+          ### Changes
+          
+          See [CHANGELOG.md](CHANGELOG.md) for detailed changes in this release.
+        draft: false
+        prerelease: false
+
+  build-and-publish:
+    runs-on: ubuntu-latest
+    needs: create-release
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+    
+    - name: Build package
+      run: python -m build
+    
+    - name: Check package
+      run: python -m twine check dist/*
+    
+    - name: Publish to PyPI
+      env:
+        TWINE_USERNAME: __token__
+        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}
+      run: python -m twine upload dist/*
+    
+    - name: Upload Release Assets
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ needs.create-release.outputs.upload_url }}
+        asset_path: ./dist/
+        asset_name: lightweight-test-runner-dist
+        asset_content_type: application/zip

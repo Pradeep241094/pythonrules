@@ -1,0 +1,113 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install coverage flake8
+        pip install -e .
+    
+    - name: Run linting
+      run: |
+        testrules lint
+    
+    - name: Run tests
+      run: |
+        testrules comprehensive
+    
+    - name: Run self-tests
+      run: |
+        # Test the test runner on itself
+        python -m pytest test_testrules.py -v || echo "pytest not available, using unittest"
+        python -m unittest test_testrules.py -v
+    
+    - name: Test CLI functionality
+      run: |
+        testrules --help
+        testrules --version
+        testrules unit --no-coverage
+        testrules integration --no-coverage
+    
+    - name: Upload coverage reports
+      if: matrix.python-version == '3.9' && matrix.os == 'ubuntu-latest'
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./htmlcov/coverage.xml
+        fail_ci_if_error: false
+
+  build:
+    runs-on: ubuntu-latest
+    needs: test
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+    
+    - name: Build package
+      run: python -m build
+    
+    - name: Check package
+      run: python -m twine check dist/*
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: dist
+        path: dist/
+
+  test-install:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    
+    - name: Download build artifacts
+      uses: actions/download-artifact@v3
+      with:
+        name: dist
+        path: dist/
+    
+    - name: Install from wheel
+      run: |
+        pip install dist/*.whl
+    
+    - name: Test installation
+      run: |
+        testrules --help
+        testrules --version
+        python -c "import testrules; print('✅ Package imported successfully')"
+        python -c "from testrules import TestRunner, Config; print('✅ Core classes imported successfully')"

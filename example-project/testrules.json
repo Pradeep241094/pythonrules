@@ -1,0 +1,57 @@
+{
+  "test_patterns": {
+    "unit": ["test_*.py", "*_test.py"],
+    "integration": ["integration_test_*.py", "*_integration_test.py"],
+    "e2e": ["e2e_test_*.py", "*_e2e_test.py"],
+    "regression": ["regression_test_*.py", "*_regression_test.py"]
+  },
+  "test_groups": {
+    "all": ["test_calculator", "test_utils", "integration_test_api"],
+    "core": ["test_calculator", "test_utils"],
+    "api": ["integration_test_api"],
+    "fast": ["test_calculator"],
+    "slow": ["integration_test_api"]
+  },
+  "coverage_enabled": true,
+  "html_coverage": true,
+  "html_coverage_dir": "htmlcov",
+  "coverage_config": {
+    "source": ["src"],
+    "omit": [
+      "*/tests/*",
+      "*/test_*",
+      "*/__pycache__/*",
+      "*/venv/*",
+      "*/env/*",
+      "setup.py"
+    ],
+    "include": ["*.py"]
+  },
+  "lint_config": {
+    "enabled": true,
+    "max_line_length": 88,
+    "ignore": ["E203", "W503"],
+    "exclude": [
+      ".git",
+      "__pycache__",
+      "build",
+      "dist",
+      "*.egg-info",
+      "venv",
+      "env"
+    ]
+  },
+  "reporting": {
+    "verbose": false,
+    "show_timing": true,
+    "show_coverage_summary": true,
+    "show_individual_results": true,
+    "emoji_output": true,
+    "color_output": true
+  },
+  "execution": {
+    "fail_fast": false,
+    "parallel": false,
+    "timeout": 300
+  }
+}

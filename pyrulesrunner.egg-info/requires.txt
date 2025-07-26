@@ -1,0 +1,14 @@
+
+[all]
+coverage>=6.0
+flake8>=4.0
+
+[coverage]
+coverage>=6.0
+
+[dev]
+coverage>=6.0
+flake8>=4.0
+
+[lint]
+flake8>=4.0

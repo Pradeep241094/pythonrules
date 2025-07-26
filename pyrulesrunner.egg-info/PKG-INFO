@@ -1,0 +1,441 @@
+Metadata-Version: 2.4
+Name: pyrulesrunner
+Version: 1.0.0
+Summary: A lightweight Python test runner with method-level discovery and coverage reporting
+Home-page: https://github.com/Pradeep241094/pythonrules
+Author: Pradeep Margasahayam Prakash
+Author-email: Pradeep Margasahayam Prakash <pradeepprakash1024@gmail.com>
+License: MIT
+Project-URL: Homepage, https://github.com/pradeepprakash1024/pyrulesrunner
+Project-URL: Repository, https://github.com/pradeepprakash1024/pyrulesrunner
+Project-URL: Issues, https://github.com/pradeepprakash1024/pyrulesrunner/issues
+Project-URL: Documentation, https://github.com/pradeepprakash1024/pyrulesrunner/blob/main/README.md
+Keywords: testing,test-runner,unittest,coverage,lint,python
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.7
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: Software Development :: Quality Assurance
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: coverage
+Requires-Dist: coverage>=6.0; extra == "coverage"
+Provides-Extra: lint
+Requires-Dist: flake8>=4.0; extra == "lint"
+Provides-Extra: dev
+Requires-Dist: coverage>=6.0; extra == "dev"
+Requires-Dist: flake8>=4.0; extra == "dev"
+Provides-Extra: all
+Requires-Dist: coverage>=6.0; extra == "all"
+Requires-Dist: flake8>=4.0; extra == "all"
+Dynamic: author
+Dynamic: home-page
+Dynamic: license-file
+Dynamic: requires-python
+
+# PyRules Runner
+
+A simple, efficient Python testing framework that provides test discovery at the method level, code coverage reporting, and basic linting capabilities. Unlike more complex testing frameworks, this lightweight solution focuses on simplicity and ease of use while still providing detailed test results.
+
+## Features
+
+- **Method-level test discovery**: Identifies individual test methods within unittest.TestCase classes
+- **Multiple test types**: Support for unit, integration, end-to-end, and regression tests
+- **Code coverage reporting**: Console and HTML coverage reports
+- **Basic linting**: PEP8 style checking with flake8
+- **Simple configuration**: JSON-based configuration for test groups and patterns
+- **Clear reporting**: Emoji-enhanced console output with detailed error information
+- **Easy installation**: Installable via pip with command-line interface
+
+## Installation
+
+### From PyPI (when published)
+
+```bash
+pip pyrulesrunner
+```
+
+### From PyPI (when published)
+
+```bash
+pip install pyrulesrunner
+```
+
+### From Source
+
+```bash
+git clone <repository-url>
+cd pyrulesrunner
+pip install -e .
+```
+
+### With Optional Dependencies
+
+```bash
+# Install with coverage support
+pip install pyrulesrunner[coverage]
+
+# Install with linting support
+pip install pyrulesrunner[lint]
+
+# Install with all optional features
+pip install pyrulesrunner[all]
+```
+
+### Legacy Installation (Single File)
+
+You can also use the standalone `testrules.py` script:
+
+```bash
+# Download testrules.py to your project
+# Install dependencies
+pip install coverage flake8
+```
+
+## Usage
+
+After installation, you can use the `testrules` command from anywhere:
+
+```bash
+# Run all tests
+testrules
+testrules --all
+
+# Run specific test types
+testrules unit
+testrules integration
+testrules e2e
+testrules regression
+
+# Run specific modules
+testrules test_module1 test_module2
+
+# Run test groups (defined in config)
+testrules core
+testrules api
+
+# Run linting only
+testrules lint
+testrules --lint-only
+
+# Run comprehensive check (linting + all tests)
+testrules check
+testrules --check
+
+# Use custom configuration
+testrules --config my_config.json
+
+# Disable coverage
+testrules --no-coverage
+
+# Show help
+testrules --help
+```
+
+### Alternative Usage
+
+You can also run it as a Python module:
+
+```bash
+python -m testrules --all
+python -m testrules unit
+```
+
+### Legacy Usage (Single File)
+
+If using the standalone script:
+
+```bash
+# Run all tests
+python testrules.py
+
+# Run specific test types
+python testrules.py unit
+python testrules.py integration
+python testrules.py e2e
+python testrules.py regression
+
+# Run specific modules
+python testrules.py test_module1 test_module2
+
+# Run linting
+python testrules.py lint
+python testrules.py check
+```
+
+## Configuration
+
+The test runner uses a `testrules.json` configuration file to define test patterns, groups, and settings:
+
+```json
+{
+  "test_patterns": {
+    "unit": ["test_*.py", "*_test.py", "unit_test_*.py"],
+    "integration": ["integration_test_*.py", "*_integration_test.py"],
+    "e2e": ["e2e_test_*.py", "*_e2e_test.py"],
+    "regression": ["regression_test_*.py", "*_regression_test.py"]
+  },
+  "test_groups": {
+    "all": [],
+    "core": ["test_core1", "test_core2"],
+    "api": ["test_api1", "test_api2"],
+    "fast": ["test_quick1", "test_quick2"],
+    "slow": ["test_slow1", "test_slow2"]
+  },
+  "coverage_enabled": true,
+  "html_coverage": true,
+  "html_coverage_dir": "htmlcov",
+  "coverage_config": {
+    "source": ["."],
+    "omit": [
+      "*/tests/*",
+      "*/test_*",
+      "*/__pycache__/*",
+      "*/venv/*",
+      "*/env/*",
+      "setup.py"
+    ]
+  },
+  "lint_config": {
+    "enabled": true,
+    "max_line_length": 88,
+    "ignore": ["E203", "W503"]
+  }
+}
+```
+
+## Using in Your Project
+
+1. **Install the package**:
+
+   ```bash
+   pip install pyrulesrunner[all]
+   ```
+
+2. **Create a `testrules.json` configuration file** in your project root:
+
+   ```json
+   {
+     "test_patterns": {
+       "unit": ["test_*.py", "*_test.py"],
+       "integration": ["integration_*.py"],
+       "e2e": ["e2e_*.py"]
+     },
+     "test_groups": {
+       "fast": ["test_utils", "test_models"],
+       "slow": ["test_integration", "test_e2e"]
+     },
+     "coverage_enabled": true,
+     "html_coverage": true
+   }
+   ```
+
+3. **Run your tests**:
+
+   ```bash
+   # Run all tests
+   testrules
+
+   # Run only fast tests
+   testrules fast
+
+   # Run unit tests with coverage
+   testrules unit
+
+   # Run tests and linting
+   testrules check
+   ```
+
+## Example Output
+
+```
+🚀 Lightweight Test Runner
+==================================================
+📄 Loaded configuration from testrules.json
+Command: all tests
+
+🔍 Discovering tests...
+📁 Found 4 test files
+
+🧪 Discovering test methods...
+🎯 Total test methods discovered: 15
+
+🚀 Running tests...
+📦 Running tests in module: test_calculator
+  [1/15] test_calculator.TestCalculator.test_add ... ✅ PASS (0.001s)
+  [2/15] test_calculator.TestCalculator.test_subtract ... ✅ PASS (0.001s)
+
+============================================================
+🧪 TEST SUMMARY
+============================================================
+✅ Passed:        14
+❌ Failed:        1
+💥 Errors:        0
+📊 Total:         15
+📈 Success Rate:  93.33%
+⏱️  Execution Time: 0.05 seconds
+
+📊 COVERAGE REPORT
+============================================================
+Name                 Stmts   Miss  Cover
+----------------------------------------
+calculator.py           20      2    90%
+utils.py               15      0   100%
+----------------------------------------
+TOTAL                   35      2    94%
+
+✅ All checks passed successfully!
+```
+
+## Writing Tests
+
+The test runner works with standard Python unittest framework:
+
+```python
+import unittest
+
+class TestExample(unittest.TestCase):
+    def test_addition(self):
+        """Test basic addition."""
+        self.assertEqual(2 + 2, 4)
+
+    def test_subtraction(self):
+        """Test basic subtraction."""
+        self.assertEqual(5 - 3, 2)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+## Test Types
+
+### Unit Tests
+
+- File patterns: `test_*.py`, `*_test.py`, `unit_test_*.py`
+- Purpose: Test individual functions or classes in isolation
+- Example: `test_calculator.py`
+
+### Integration Tests
+
+- File patterns: `integration_test_*.py`, `*_integration_test.py`
+- Purpose: Test interaction between multiple components
+- Example: `integration_test_database.py`
+
+### End-to-End Tests
+
+- File patterns: `e2e_test_*.py`, `*_e2e_test.py`
+- Purpose: Test complete user workflows
+- Example: `e2e_test_user_registration.py`
+
+### Regression Tests
+
+- File patterns: `regression_test_*.py`, `*_regression_test.py`
+- Purpose: Test previously fixed bugre they don't reoccur
+- Example: `regression_test_issue_123.py`
+
+## Programmatic Usage
+
+You can also use the test runner programmatically:
+
+```python
+from testrules import TestRunner, Config
+
+# Create configuration
+config = Config({
+    "test_patterns": {
+        "unit": ["test_*.py"]
+    },
+    "coverage_enabled": True
+})
+
+# Create and run test runner
+runner = TestRunner(config)
+test_results, coverage_obj = runner.run_tests(test_type="unit")
+
+print(f"Tests run: {test_results.total}")
+print(f"Passed: {test_results.passed}")
+print(f"Failed: {test_results.failed}")
+```
+
+## Project Structure
+
+```
+your_project/
+├── testrules.json           # Configuration file (optional)
+├── src/                     # Your source code
+│   ├── module1.py
+│   └── module2.py
+├── tests/                   # Your test files
+│   ├── test_module1.py      # Unit tests
+│   ├── test_module2.py      # Unit tests
+│   ├── integration_test_api.py    # Integration tests
+│   ├── e2e_test_workflow.py       # End-to-end tests
+│   └── regression_test_bug_fix.py # Regression tests
+└── htmlcov/                 # HTML coverage reports (generated)
+```
+
+## Development
+
+To contribute to the project:
+
+```bash
+git clone <repository-url>
+cd pyrulesrunner
+pip install -e .[dev]
+
+# Run the test runner's own tests
+testrules test_testrules
+
+# Run all example tests
+testrules comprehensive
+```
+
+## Requirements
+
+- Python 3.7+
+- Optional: `coverage>=6.0` for coverage reporting
+- Optional: `flake8>=4.0` for linting
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Module Import Errors**
+
+   - Ensure your test files are in the Python path
+   - Check that all dependencies are installed
+   - Verify file names match the expected patterns
+
+2. **Coverage Not Working**
+
+   - Install coverage: `pip install pyrulesrunner[coverage]`
+   - Ensure coverage is enabled in configuration
+
+3. **Linting Not Working**
+   - Install flake8: `pip install pyrulesrunner[lint]`
+   - Check that your Python files are accessible
+
+### Getting Help
+
+If you encounter issues:
+
+1. Check that all dependencies are installed
+2. Verify your test file naming follows the expected patterns
+3. Ensure your test files contain valid unittest.TestCase classes
+4. Check the configuration file syntax if using custom settings
+
+## Contributing
+
+This is a lightweight test runner designed for simplicity. If you need more advanced features, consider using pytest or other full-featured testing frameworks.
+
+## License
+
+This project is open source under the MIT License. Feel free to modify and distribut

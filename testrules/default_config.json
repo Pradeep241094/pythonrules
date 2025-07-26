@@ -1,0 +1,78 @@
+{
+  "test_patterns": {
+    "unit": ["test_*.py", "*_test.py", "unit_test_*.py"],
+    "integration": ["integration_test_*.py", "*_integration_test.py"],
+    "e2e": ["e2e_test_*.py", "*_e2e_test.py"],
+    "regression": ["regression_test_*.py", "*_regression_test.py"]
+  },
+  "test_groups": {
+    "all": [],
+    "fast": [],
+    "slow": []
+  },
+  "coverage_enabled": true,
+  "html_coverage": true,
+  "html_coverage_dir": "htmlcov",
+  "coverage_config": {
+    "source": ["."],
+    "omit": [
+      "*/tests/*",
+      "*/test_*",
+      "*/__pycache__/*",
+      "*/venv/*",
+      "*/env/*",
+      "setup.py"
+    ],
+    "include": ["*.py"],
+    "exclude_lines": [
+      "pragma: no cover",
+      "def __repr__",
+      "if self.debug:",
+      "if settings.DEBUG",
+      "raise AssertionError",
+      "raise NotImplementedError",
+      "if 0:",
+      "if __name__ == .__main__.:"
+    ]
+  },
+  "lint_config": {
+    "enabled": true,
+    "max_line_length": 88,
+    "ignore": ["E203", "W503"],
+    "exclude": [
+      ".git",
+      "__pycache__",
+      "build",
+      "dist",
+      "*.egg-info",
+      "venv",
+      "env"
+    ]
+  },
+  "reporting": {
+    "verbose": false,
+    "show_timing": true,
+    "show_coverage_summary": true,
+    "show_individual_results": true,
+    "emoji_output": true,
+    "color_output": true
+  },
+  "execution": {
+    "fail_fast": false,
+    "parallel": false,
+    "timeout": 300,
+    "retry_failed": false,
+    "retry_count": 1
+  },
+  "discovery": {
+    "recursive": true,
+    "follow_symlinks": false,
+    "ignore_patterns": [
+      "__pycache__",
+      "*.pyc",
+      ".git",
+      ".pytest_cache",
+      "node_modules"
+    ]
+  }
+}

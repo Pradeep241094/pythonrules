@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=45", "wheel", "setuptools_scm[toml]>=6.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrulesrunner"
+version = "1.0.0"
+authors = [
+    {name = "Pradeep Margasahayam Prakash", email = "pradeepprakash1024@gmail.com"},
+]
+description = "A lightweight Python test runner with method-level discovery and coverage reporting"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.7"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Software Development :: Testing",
+    "Topic :: Software Development :: Quality Assurance",
+]
+keywords = ["testing", "test-runner", "unittest", "coverage", "lint", "python"]
+
+[project.urls]
+Homepage = "https://github.com/pradeepprakash1024/pyrulesrunner"
+Repository = "https://github.com/pradeepprakash1024/pyrulesrunner"
+Issues = "https://github.com/pradeepprakash1024/pyrulesrunner/issues"
+Documentation = "https://github.com/pradeepprakash1024/pyrulesrunner/blob/main/README.md"
+
+[project.optional-dependencies]
+coverage = ["coverage>=6.0"]
+lint = ["flake8>=4.0"]
+dev = ["coverage>=6.0", "flake8>=4.0"]
+all = ["coverage>=6.0", "flake8>=4.0"]
+
+[project.scripts]
+testrules = "testrules.cli:main"
+pyrulesrunner = "testrules.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["testrules*"]
+
+[tool.setuptools.package-data]
+testrules = ["*.json"]
